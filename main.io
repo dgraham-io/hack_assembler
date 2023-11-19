@@ -12,8 +12,14 @@ if((filename containsAnyCaseSeq(".asm") not), filename print " is not an .asm fi
             "is not a valid file" println
             return)
         
+        symbolTable := SymbolTable clone
+        
         parser := Parser clone
-        parser parse(file)
+        parsedSequence := parser parse(file, symbolTable)
+
+        translator := Translator clone
+        translator translate(parsedSequence, symbolTable)
+        
     ) ifFalse (
         "Filename " print filename print " not found" println
     )
