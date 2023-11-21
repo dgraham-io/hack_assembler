@@ -69,16 +69,20 @@ Parser := Object clone do(
                 advance
                 current := fileBuffer at(filePosition)
                 while (current between (48, 57),
+                    "found " print
+                    current println
                     numString append(current)
                     advance
                     current := fileBuffer at(filePosition)
                 )
                 aInstruction := numString asNumber
-                aInstruction println
+                aInstruction asBinary println
                 continue
             )
 
-            current asCharacter print
+            (current asCharacter)
+
+            // current asCharacter print
 
             filePosition = filePosition + 1
         )
