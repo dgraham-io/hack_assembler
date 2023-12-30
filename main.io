@@ -13,7 +13,7 @@ if((filename containsAnyCaseSeq(".asm") not), filename print " is not an .asm fi
             return)
 
         // Broken - File remove("output.hack")
-        File exists("output.hack") println
+        // File exists("output.hack") println
         outputFile := File clone open("output.hack")        
 
         "Parsing " print

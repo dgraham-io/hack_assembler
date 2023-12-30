@@ -16,9 +16,6 @@ Parser := Object clone do(
         return bitString
     )
 
-    // parseCinstruction := method(
-    //     "Parsing C instruction" println
-    // )
 
     parse := method(line,
 
@@ -30,14 +27,16 @@ Parser := Object clone do(
         // discard comments
         commentSplit := line split("//")
 
-        (commentSplit size > 1) ifTrue (
+        ((commentSplit size < 1) or (commentSplit at(0) == nil)) ifTrue (
             break
         )
 
         // non-code should be removed at this point
         code := commentSplit at(0)
 
-        //code  println
+        (code at(0) == nil) ifTrue (
+            break
+        )
 
         // A-instructions
         (code at(0) asCharacter == "@") ifTrue (
