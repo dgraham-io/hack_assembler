@@ -12,16 +12,31 @@ if((filename containsAnyCaseSeq(".asm") not), filename print " is not an .asm fi
             "is not a valid file" println
             return)
 
+        outputName := filename split(".") at(0)
+        outputName = outputName .. ".hack"
+        outputName println
+
         // Broken - File remove("output.hack")
         // File exists("output.hack") println
-        outputFile := File clone open("output.hack")        
+        outputFile := File clone open(outputName)        
 
         "Parsing " print
         inputFile name println
         inputFile openForReading
 
         inputFile foreachLine(line,
-            result := Parser parse(line)
+            result := Parser parseLabel(line)
+        )
+
+        // SymbolTable foreach(k, v, 
+        //     k print
+        //     " " print 
+        //     v println
+        // )
+        inputFile rewind
+
+        inputFile foreachLine(line,
+            result := Parser parseCode(line)
             
             (result != nil) ifTrue (
 
@@ -30,9 +45,6 @@ if((filename containsAnyCaseSeq(".asm") not), filename print " is not an .asm fi
                 outputFile write(result, "\n")
             )
         )
-        //parsedSequence := Parser parse(file, SymbolTable)
-
-        //Translator translate(parsedSequence, SymbolTable)
         
     ) ifFalse (
         "Filename " print filename print " not found" println
