@@ -1,1 +1,1 @@
-Hack assembler written in Io for "The Elements of Computing Systems"
+Hack assembler written in Io for "The Elements of Computing Systems". Definitely one of my favorite CompSci books ever.
